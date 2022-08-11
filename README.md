@@ -4,8 +4,8 @@ Registro de Clientes e Endereços com validação na API dos Correios.
 A arquitetura do projeto segue padrões, como: 
 - Casos de uso separados em arquivos diferentes no projeto Application, respeitando o princípio de responsabilidade única
 - Utilização de Data Transfer Objects para não expor as entidades do banco de dados 
-- Inversão e Injeção de Dependência para melhor organização do código e em respeito ao princípio de Inversão de controle, preferindo a utlização de contratos em vez de intâncias diretas
-Projetos da Solução
+- Inversão e Injeção de Dependência para melhor organização do código e em respeito ao princípio de Inversão de controle, preferindo a utlização de contratos em vez de intâncias diretas.
+## Projetos da Solução
 - ClientsRegistration.Model : Definição das entidades e contratos de repositórios
 - ClientsRegistration.Infra : Classes de  contexto, implementação de repositórios e demais infraestruturas 
 - ClientsRegistration.Application : Regras de negócio, manipulação de dados e camada de interação entre a API e os repositórios
