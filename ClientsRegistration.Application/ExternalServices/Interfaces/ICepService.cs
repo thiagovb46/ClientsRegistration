@@ -8,6 +8,6 @@ namespace ClientsRegistration.Application.ExternalServices.Interfaces
 {
     public interface ICepService
     {
-        Task<AddressDto> CepToAddressDto(string cep);
+        Task<AddressDto> VerifyAddress(AddressDto dto);
     }
 }

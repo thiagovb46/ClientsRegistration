@@ -20,7 +20,7 @@ namespace ClientsRegistration.Application.UseCases.Implementations
         }
         public async Task<ClientResponseDto> Create(ClientRequestDto dto)
         {
-            var address = await _cepService.CepToAddressDto(dto.Address.PostalCode);
+            dto.Address = await _cepService.VerifyAddress(dto.Address);
             var newClient = _converter.Convert(dto);
             return _converter.Convert(await _repository.Create(newClient));
         }

@@ -27,13 +27,15 @@ namespace ClientsRegistration.Infra.Data.Repositories
 
         public async Task<List<Client>> GetAll()
         {
-            var clients = await _context.Clients.ToListAsync();
+            var clients = await _context.Clients
+                .Include(c => c.Address).Include(c => c.PhoneNumbers).ToListAsync();
             return clients;
         }
 
         public async Task<Client> GetOne(int id)
         {
-            var client = await _context.Clients
+            var client = await _context.Clients.Include(c => c.Address)
+                .Include(c => c.PhoneNumbers)
                 .FirstOrDefaultAsync(c => c.Id.Equals(id));
             if (client.Equals(default))
                 throw new ClientNotFoundException();
