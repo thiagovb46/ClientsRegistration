@@ -14,6 +14,8 @@ namespace ClientsRegistration.Application.Converters
                 {
                     Name = dto.Name,
                     Cpf = dto.CPF,
+                    Cnpj = dto.Cnpj,
+                    EnterpriseName = dto.EnterpriseName,
                     PhoneNumbers = FillPhoneNumbers(dto.Phones),
                     Address = FillAddress(dto.Address),
                     Email = dto.Email,
@@ -37,6 +39,7 @@ namespace ClientsRegistration.Application.Converters
         {
             return new()
             {
+                Id = client.Id,
                 Name = client.Name,
                 EnterpriseName = client.Name,
                 CPF = client.Cpf,
@@ -52,7 +55,7 @@ namespace ClientsRegistration.Application.Converters
         {
             return new()
             {
-                PhoneNumbers = FillPhoneNumbers(clientDto.PhoneNumbers),
+                PhoneNumbers = FillPhoneNumbers(clientDto.Phones),
                 Address = FillAddress(clientDto.Address),
                 Email = client.Email,
                 Classification = client.Classification
@@ -65,8 +68,9 @@ namespace ClientsRegistration.Application.Converters
             {
                 clientsDto.Add(new()
                 {
+                    Id = client.Id,
                     Name = client.Name,
-                    EnterpriseName = client.Name,
+                    EnterpriseName = client.EnterpriseName,
                     CPF = client.Cpf,
                     Cnpj = client.Cnpj,
                     Phones = FillPhoneNumbers(client.PhoneNumbers),

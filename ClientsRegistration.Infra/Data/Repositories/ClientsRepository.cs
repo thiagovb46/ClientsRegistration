@@ -21,8 +21,8 @@ namespace ClientsRegistration.Infra.Data.Repositories
 
         public async Task Delete(Client client)
         {
-            _context.Clients.Remove(client);
-            await SaveChangesAsync();
+            _context.Remove<Client>(client);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<List<Client>> GetAll()
@@ -37,7 +37,7 @@ namespace ClientsRegistration.Infra.Data.Repositories
             var client = await _context.Clients.Include(c => c.Address)
                 .Include(c => c.PhoneNumbers)
                 .FirstOrDefaultAsync(c => c.Id.Equals(id));
-            if (client.Equals(default))
+            if (client == null)
                 throw new ClientNotFoundException();
             return client;
         }

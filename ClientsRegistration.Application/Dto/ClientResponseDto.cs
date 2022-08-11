@@ -1,6 +1,5 @@
 ﻿using ClientsRegistration.Application.Validations;
 using ClientsRegistration.Model.Enum;
-using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -28,10 +27,10 @@ namespace ClientsRegistration.Application.Dto
         public List<PhoneNumberDto> Phones { get; set; }
         [MaxLength(100, ErrorMessage = "Campo {0} deve ter no máximo 100 caracteres")]
         [ReqWhen(nameof(ClientType), ClientTypeEnum.juridica)]
-        //[JsonPropertyName("razaoSocial")]
+        [JsonPropertyName("razaoSocial")]
         public string? EnterpriseName { get; set; }
+        [JsonPropertyName("endereco")]
         public AddressDto Address { get; set; }
-        public string? PostalCode { get; set; }
         [JsonPropertyName("classificacao")]
         public ClassificationEnum Classification { get; set; }
         public ClientResponseDto GetExamples()

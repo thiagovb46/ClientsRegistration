@@ -59,14 +59,18 @@ namespace ClientsRegistration.Api.Controllers
         ///</summary>
         /// <remarks>
         /// <h3><u>Descrição: Rota para cadastro de clientes, exemplos abaixo</u></h3>
-        /// <h4><b>Observações: </b> </h4> 
+        /// 
+        ///<h4><b>Observações: </b> </h4> 
         /// <h4><u>Campos Obrigatórios para tipoCliente "fisica" : [cpf, nome, email, telefones, endereco, classificacao]</u></h4>
         /// <h4><u>Campos Obrigatórios para tipoCliente "juridica" : [cnpj, razaoSocial, email, telefones, endereco, classificacao]</u></h4>
         /// <h4><b>Valores Validos para enums: </b></h4>
         /// 
         /// tipoCliente :["fisica", "juridica"]
         /// classificacao :["Active", "Inactive", "Preferential"]
-        /// </remarks>  
+        /// 
+        /// 
+        /// 
+        ///</remarks>  
         /// <response code="201">Cliente Cadastrado com sucesso</response>
         /// <response code="400">Problemas no corpo da requisição.</response>
         /// <response code="500"> Erro de Servidor.</response> 

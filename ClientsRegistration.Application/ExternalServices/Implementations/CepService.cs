@@ -20,7 +20,7 @@ namespace ClientsRegistration.Application.ExternalServices.Implementations
             dto.City = address.localidade.Contains(dto.City) ? address.localidade : throw new DifferentAddressException("cidade");
             dto.Street = address.logradouro.Contains(dto.Street) ? address.logradouro : throw new DifferentAddressException("logradouro");
             dto.State = address.uf.Equals(dto.State.ToUpper()) ? address.uf : throw new DifferentAddressException("Estado");
-            dto.Neighborhood = address.bairro.Contains(dto.Neighborhood) ? address.uf : throw new DifferentAddressException("Bairro");
+            dto.Neighborhood = address.bairro.Contains(dto.Neighborhood) ? address.bairro : throw new DifferentAddressException("Bairro");
             return dto;
         }
     }
