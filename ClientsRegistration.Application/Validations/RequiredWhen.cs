@@ -2,12 +2,12 @@
 
 namespace ClientsRegistration.Application.Validations
 {
-    public class RequiredWhenAttribute : ValidationAttribute
+    public class ReqWhenAttribute : ValidationAttribute
     {
         public List<object> ValuesToLookFor { get; set; }
         public string RelatedProperty { get; set; }
 
-        public RequiredWhenAttribute(string relatedProperty, params object[] values)
+        public ReqWhenAttribute(string relatedProperty, params object[] values)
         {
             RelatedProperty = relatedProperty;
             ValuesToLookFor = new List<object>(values);
@@ -31,8 +31,7 @@ namespace ClientsRegistration.Application.Validations
 
             if (value != default)
                 return ValidationResult.Success;
-            else
-                return new ValidationResult(GetErrorMessage(validationContext));
+            return new ValidationResult(GetErrorMessage(validationContext));
         }
     }
 }

@@ -31,9 +31,12 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cadastro de clientes", Version = "v1" });
+    c.EnableAnnotations();
     c.ExampleFilters();
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
+builder.Services.AddSwaggerGenNewtonsoftSupport();
+builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
@@ -46,11 +49,12 @@ builder.Services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
 
 builder.Services.AddScoped<IClientConverter, ClientConverter>();
 builder.Services.AddScoped<ICepService, CepService>();
-builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
