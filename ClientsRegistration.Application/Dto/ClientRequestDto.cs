@@ -10,7 +10,8 @@ namespace ClientsRegistration.Application.Dto
     {
         #region Properties
         [Required]
-        [JsonConverter(typeof(StringEnumConverter))]
+        //[JsonConverter(typeof(StringEnumConverter))]
+        [JsonPropertyName("tipoCliente")]
         public ClientTypeEnum ClientType { get; set; }
         [RequiredWhen(nameof(ClientType), ClientTypeEnum.juridica)]
         [MaxLength(14, ErrorMessage = "Campo {0} deve ter 14 caracteres e não deve ter caracteres especiais")]
@@ -33,6 +34,7 @@ namespace ClientsRegistration.Application.Dto
         [RequiredWhen(nameof(ClientType), ClientTypeEnum.juridica)]
         [JsonPropertyName("razaoSocial")]
         public string EnterpriseName { get; set; }
+        [JsonPropertyName("endereco")]
         public AddressDto Address { get; set; }
         [JsonPropertyName("classificacao")]
         public ClassificationEnum Classification { get; set; }
@@ -43,6 +45,12 @@ namespace ClientsRegistration.Application.Dto
             return new()
             {
                 ClientType = ClientTypeEnum.fisica,
+                CPF = "16876931021",
+                Name = "Joao Silveira",
+                Email = "joaoj@gmail.com",
+                Phones = new PhoneNumberDto().GetExample(),
+                Address = new AddressDto().GetExample(),
+                Classification = ClassificationEnum.Active,
             };
         }
         #endregion

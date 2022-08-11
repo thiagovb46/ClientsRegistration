@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 namespace ClientsRegistration.Model.Enum
 {
-    [JsonConverter(typeof(StringEnumConverter))]
     public enum ClassificationEnum : int
     {
         Active = 1,

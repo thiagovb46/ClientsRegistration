@@ -8,7 +8,6 @@ using Newtonsoft.Json.Converters;
 
 namespace ClientsRegistration.Model.Enum
 {
-    [JsonConverter(typeof(StringEnumConverter))]
     public enum ClientTypeEnum : int
     {
         fisica = 1,

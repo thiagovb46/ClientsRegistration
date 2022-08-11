@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(xmlPath);
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cadastro de clientes", Version = "v1" });
     c.ExampleFilters();
+    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 });
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
@@ -45,7 +47,6 @@ builder.Services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
 builder.Services.AddScoped<IClientConverter, ClientConverter>();
 builder.Services.AddScoped<ICepService, CepService>();
 builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
-
 var app = builder.Build();
 
 app.UseSwagger();
