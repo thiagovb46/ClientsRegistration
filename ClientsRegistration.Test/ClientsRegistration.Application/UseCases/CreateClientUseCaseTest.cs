@@ -7,6 +7,7 @@ using ClientsRegistration.Model.IRepositories;
 using ClientsRegistration.Model.Model;
 using Moq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ClientsRegistration.Test
@@ -16,43 +17,23 @@ namespace ClientsRegistration.Test
         public Mock<IClientsRepository> repositoryMock = new();
         public Mock<ICepService> cepServiceMock = new();
         public Mock<IClientConverter> converterMock = new();
-        public CreateClientUseCaseTest()
-        {
-            repositoryMock.Setup(repo => repo
-            .Create(It.IsAny<Client>()))
-                .Returns((Client c) => c);
 
-            cepServiceMock.Setup(cep => cep
-            .VerifyAddress(It.IsAny<AddressDto>()))
-                .Returns((AddressDto c) => c);
-        }
         [Theory]
         [MemberData(nameof(ClientDtoTestDataGenerator))]
         public async void CreateTest(ClientRequestDto clientDto)
         {
+            cepServiceMock.Setup(x => x.VerifyAddress(It.IsAny<AddressDto>())).Returns(Task.FromResult(clientDto.Address));
+            repositoryMock.Setup(x => x.Create(It.IsAny<Client>())).Returns(Task.FromResult(new Client() { Name = clientDto.Name }));
+            converterMock.Setup(x => x.Convert(It.IsAny<ClientRequestDto>())).Returns(new Client() { Name = clientDto.Name, Cpf = clientDto.CPF });
+            converterMock.Setup(x => x.Convert(It.IsAny<Client>())).Returns(new ClientResponseDto() { Name = clientDto.Name, CPF = clientDto.CPF });
             //Arrange
-            converterMock.Setup(con => con.Convert(It.IsAny<ClientRequestDto>()))
-            .Returns((new Client()
-            {
-                Cpf = clientDto.CPF,
-                Cnpj = clientDto.Cnpj,
-                Email = clientDto.Email,
-                Name = clientDto.Name,
-                Address = new()
-                {
-                    PostalCode = clientDto.Address.PostalCode,
-                }
-            }));
             CreateClientUseCase useCase = new(repositoryMock.Object, converterMock.Object, cepServiceMock.Object);
+
             //Act
             var actual = await useCase.Create(clientDto);
             //Assert
-            Assert.Equal(clientDto.CPF, actual.CPF);
-            Assert.Equal(clientDto.Cnpj, actual.Cnpj);
-            Assert.Equal(clientDto.Email, actual.Email);
             Assert.Equal(clientDto.Name, actual.Name);
-            Assert.Equal(clientDto.Address.PostalCode, actual.Address.PostalCode);
-
+            Assert.Equal(clientDto.CPF, actual.CPF);
         }
         public static IEnumerable<object[]> ClientDtoTestDataGenerator()
         {

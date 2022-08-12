@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClientsRegistration.Application.Dto
+﻿namespace ClientsRegistration.Application.Dto
 {
     public class PhoneNumberDto
     {
@@ -17,7 +11,7 @@ namespace ClientsRegistration.Application.Dto
             numbers.Add(new PhoneNumberDto()
             {
                 Number = "998259340",
-                Ddd = Ddd,
+                Ddd = 31,
             });
             numbers.Add(new PhoneNumberDto()
             {
