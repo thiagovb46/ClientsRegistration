@@ -23,7 +23,7 @@ public class ExceptionMiddleware
     }
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        string mess = "Erro desconhecido";
+        string mess = exception.Message;
 
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -32,11 +32,15 @@ public class ExceptionMiddleware
             mess = exception.Message;
             context.Response.StatusCode = 404;
         }
-        context.Response.StatusCode = 404;
-        await context.Response.WriteAsync(
-            new ErrorDetails()
-            {
-                Message = mess,
-            }.ToString());
+        else
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync(
+                new ErrorDetails()
+                {
+                    Message = mess,
+                }.ToString());
+        }
+
     }
 }

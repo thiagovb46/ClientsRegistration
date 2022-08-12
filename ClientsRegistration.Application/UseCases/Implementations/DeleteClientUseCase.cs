@@ -14,7 +14,7 @@ namespace ClientsRegistration.Application.UseCases.Implementations
         public async Task Delete(int id)
         {
             var client = await _repository.GetOne(id);
-            _repository.Delete(client);
+            await _repository.Delete(client);
         }
     }
 }
