@@ -12,10 +12,8 @@ namespace ClientsRegistration.Application.Dto
         [JsonPropertyName("email")]
         public string Email { get; set; }
         [Required]
-        [Phone]
         [JsonPropertyName("telefones")]
         public List<PhoneNumberDto> Phones { get; set; }
-        [MaxLength(100, ErrorMessage = "Campo {0} deve ter no máximo 100 caracteres")]
         [JsonPropertyName("endereco")]
         public AddressDto Address { get; set; }
         [JsonPropertyName("classificacao")]

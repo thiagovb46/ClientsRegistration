@@ -13,8 +13,10 @@ namespace ClientsRegistration.Application.Dto
         [Required]
         public ClientTypeEnum ClientType { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.juridica)]
+        [ValidCNPJ]
         public string? Cnpj { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
+        [ValidCPF]
         public string? CPF { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [JsonPropertyName("nome")]

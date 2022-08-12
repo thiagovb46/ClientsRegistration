@@ -53,13 +53,12 @@ namespace ClientsRegistration.Application.Converters
         }
         public Client Convert(ClientUpdateRequestDto clientDto, Client client)
         {
-            return new()
-            {
-                PhoneNumbers = FillPhoneNumbers(clientDto.Phones),
-                Address = FillAddress(clientDto.Address),
-                Email = client.Email,
-                Classification = client.Classification
-            };
+            client.PhoneNumbers = FillPhoneNumbers(clientDto.Phones);
+            client.Address = FillAddress(clientDto.Address);
+            client.Email = clientDto.Email;
+            client.Classification = clientDto.Classification;
+
+            return client;
         }
         public List<ClientResponseDto> Convert(List<Client> clients)
         {
