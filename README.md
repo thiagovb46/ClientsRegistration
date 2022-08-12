@@ -17,3 +17,7 @@ A arquitetura do projeto segue padrões, como:
 
 # Testes Unitários
 - Foi criado um teste unitário para verificar o correto funcionamento do caso de uso de criação de cliente.
+
+# Exemplos do Swagger
+- As requisições de exemplo do swagger foram criadas de maneira mais realista possível, através do SwaggerExampleFilter, tornando a API o mais amigável possível 
+- Na descrição das rotas no swagger foram adicionados exemplos de todos os valores válidos para os enums bem como um resumo da funcionalidade da rota.
