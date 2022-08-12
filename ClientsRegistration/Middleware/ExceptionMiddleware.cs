@@ -31,6 +31,11 @@ public class ExceptionMiddleware
         {
             mess = exception.Message;
             context.Response.StatusCode = 404;
+            await context.Response.WriteAsync(
+                new ErrorDetails()
+                {
+                    Message = mess,
+                }.ToString());
         }
         else
         {

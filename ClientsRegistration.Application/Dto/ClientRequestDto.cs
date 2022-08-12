@@ -14,10 +14,11 @@ namespace ClientsRegistration.Application.Dto
         public ClientTypeEnum ClientType { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.juridica)]
         [ValidCNPJ]
+        [MaxLength(14, ErrorMessage = "Campo {0} deve ter 14 digitos e sem caracteres especiais")]
         public string? Cnpj { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [ValidCPF]
-        [MinLength(11, ErrorMessage = "Campo {0} deve ter no máximo 11 digitos e sem caracteres especiais")]
+        [MaxLength(11, ErrorMessage = "Campo {0} deve ter 11 digitos e sem caracteres especiais")]
         public string? CPF { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [JsonPropertyName("nome")]

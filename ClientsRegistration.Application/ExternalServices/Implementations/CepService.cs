@@ -8,7 +8,6 @@ namespace ClientsRegistration.Application.ExternalServices.Implementations
 {
     public class CepService : ICepService
     {
-
         public async Task<AddressDto> VerifyAddress(AddressDto dto)
         {
             var address = await "https://viacep.com.br/ws/"

@@ -8,6 +8,7 @@ namespace ClientsRegistration.Application.Dto
         #region Properties
         [JsonPropertyName("cep")]
         [Required]
+        [MaxLength(8, ErrorMessage = "Formato de Cep Invalido, envie sem caracteres especiais")]
         public string PostalCode { get; set; }
         [Required]
         [JsonPropertyName("logradouro")]

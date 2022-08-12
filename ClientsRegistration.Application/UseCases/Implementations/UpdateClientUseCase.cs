@@ -3,6 +3,7 @@ using ClientsRegistration.Application.Dto;
 using ClientsRegistration.Application.ExternalServices.Interfaces;
 using ClientsRegistration.Application.UseCases.Interfaces;
 using ClientsRegistration.Model.IRepositories;
+using ClientsRegistration.Model.Model;
 
 namespace ClientsRegistration.Application.UseCases.Implementations
 {
@@ -22,6 +23,9 @@ namespace ClientsRegistration.Application.UseCases.Implementations
         {
             dto.Address = await _cepService.VerifyAddress(dto.Address);
             var client = await _repository.GetOne(id);
+            var emailExists = await _repository.EmailExistsInOtherClient(new Client() { Email = dto.Email, Id = id });
+            if (emailExists)
+                throw new Exception("Já existe um outro cliente cadastrado com esse E-mail");
             _converter.Convert(dto, client);
             await _repository.SaveChangesAsync();
             return _converter.Convert(client);

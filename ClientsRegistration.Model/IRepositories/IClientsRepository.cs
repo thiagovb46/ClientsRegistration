@@ -10,5 +10,6 @@ namespace ClientsRegistration.Model.IRepositories
         Task SaveChangesAsync();
         Task Delete(Client client);
         Task<bool> ClientExists(Client client);
+        Task<bool> EmailExistsInOtherClient(Client client);
     }
 }

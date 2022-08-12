@@ -49,11 +49,18 @@ namespace ClientsRegistration.Infra.Data.Repositories
             var cnpjExists = client.Cnpj != null
                 ? await _context.Clients.AnyAsync(c => c.Cnpj == client.Cnpj)
                 : false;
-            var emailExists = client.Email == null
-                ? await _context.Clients.AnyAsync(c => c.Cnpj == client.Cnpj)
+            var emailExists = client.Email != null
+                ? await _context.Clients.AnyAsync(c => c.Email == client.Email)
                 : false;
 
             return cpfExists || cnpjExists || emailExists;
+        }
+        public async Task<bool> EmailExistsInOtherClient(Client client)
+        {
+            var emailExists = client.Email != null
+                ? await _context.Clients.AnyAsync(c => c.Email == client.Email && c.Id != client.Id)
+                : false;
+            return emailExists;
         }
         public async Task SaveChangesAsync()
         {
