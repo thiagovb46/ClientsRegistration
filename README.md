@@ -1,5 +1,6 @@
 # Documentação: Registro de Clientes com seus Endereços e Telefones
 Registro de Clientes e Endereços com validação na API dos Correios.
+- Projeto desenvolvido em .NET 6
 # Arquitetura do Projeto 
 A arquitetura do projeto segue padrões, como: 
 - Casos de uso separados em arquivos diferentes no projeto Application, respeitando o princípio de responsabilidade única
