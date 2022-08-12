@@ -20,6 +20,10 @@ namespace ClientsRegistration.Application.UseCases.Implementations
         }
         public async Task<ClientResponseDto> Create(ClientRequestDto dto)
         {
+            var clientExists = await _repository.ClientExists(_converter.Convert(dto));
+            if (clientExists)
+                throw new Exception("Já existe um cliente cadastrado com esse cpf ou cnpj ou E-mail");
+
             dto.Address = await _cepService.VerifyAddress(dto.Address);
             var newClient = _converter.Convert(dto);
             return _converter.Convert(await _repository.Create(newClient));

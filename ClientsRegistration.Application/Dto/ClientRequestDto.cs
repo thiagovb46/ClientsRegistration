@@ -20,6 +20,7 @@ namespace ClientsRegistration.Application.Dto
         public string? CPF { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [JsonPropertyName("nome")]
+        [MaxLength(100, ErrorMessage = "Campo {0} deve ter no máximo 100 caracteres")]
         public string? Name { get; set; }
         [Required]
         [EmailAddress]

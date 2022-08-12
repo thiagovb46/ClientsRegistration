@@ -10,7 +10,7 @@ namespace ClientsRegistration.Model.Model
         public string? Name { get; set; }
         [MaxLength(100)]
         public string? EnterpriseName { get; set; }
-        [MaxLength(11)]
+        [MaxLength(22)]
         public string? Cpf { get; set; }
         [MaxLength(14)]
         public string? Cnpj { get; set; }

@@ -15,8 +15,10 @@ namespace ClientsRegistration.Application.Dto
         [JsonPropertyName("telefones")]
         public List<PhoneNumberDto> Phones { get; set; }
         [JsonPropertyName("endereco")]
+        [Required]
         public AddressDto Address { get; set; }
         [JsonPropertyName("classificacao")]
+        [Required]
         public ClassificationEnum Classification { get; set; }
         #endregion
 

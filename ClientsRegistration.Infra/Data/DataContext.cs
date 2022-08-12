@@ -10,5 +10,20 @@ namespace ClientsRegistration.Infra.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Client>(entity =>
+            {
+                entity.HasIndex(e => e.Cpf).IsUnique();
+            });
+            modelBuilder.Entity<Client>(entity =>
+            {
+                entity.HasIndex(e => e.Cnpj).IsUnique();
+            });
+            modelBuilder.Entity<Client>(entity =>
+            {
+                entity.HasIndex(e => e.Email).IsUnique();
+            });
+        }
     }
 }

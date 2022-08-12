@@ -1,9 +1,4 @@
 ﻿using ClientsRegistration.Model.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientsRegistration.Model.IRepositories
 {
@@ -14,5 +9,6 @@ namespace ClientsRegistration.Model.IRepositories
         Task<Client> GetOne(int id);
         Task SaveChangesAsync();
         Task Delete(Client client);
+        Task<bool> ClientExists(Client client);
     }
 }

@@ -30,7 +30,6 @@ namespace ClientsRegistration.Api.Controllers
         ///Retorna uma lista com todos os clientes cadastrados
         ///</summary>
         /// <response code="200">Sucesso</response>
-        /// <response code="400">Problemas no corpo da requisição.</response>
         /// <response code="500"> Erro de Servidor.</response> 
         // GET: api/<ClientsController>
         [HttpGet]
@@ -44,7 +43,7 @@ namespace ClientsRegistration.Api.Controllers
         ///Retorna o cliente com o Id informado pela rota
         ///</summary>
         /// <response code="200">Sucesso</response>
-        /// <response code="400">Problemas no corpo da requisição.</response>
+        /// <response code="404">Cliente não encontrado.</response>
         /// <response code="500"> Erro de Servidor.</response> 
         // GET api/<ClientsController>/5
         [HttpGet("{id}")]
@@ -61,8 +60,10 @@ namespace ClientsRegistration.Api.Controllers
         /// <h3><u>Descrição: Rota para cadastro de clientes, exemplos abaixo</u></h3>
         /// 
         ///<h4><b>Observações: </b> </h4> 
-        /// <h4><u>Campos Obrigatórios para tipoCliente "fisica" : [cpf, nome, email, telefones, endereco, classificacao]</u></h4>
-        /// <h4><u>Campos Obrigatórios para tipoCliente "juridica" : [cnpj, razaoSocial, email, telefones, endereco, classificacao]</u></h4>
+        /// <h4><u> - Campos Obrigatórios para tipoCliente "fisica" : [tipoCliente, cpf, nome, email, telefones, endereco, classificacao]</u></h4>
+        /// <h4><u> - Campos Obrigatórios para tipoCliente "juridica" : [tipoCliente, cnpj, razaoSocial, email, telefones, endereco, classificacao]</u></h4>
+        /// <h4><u> - OS campos CPF e CNPJ devem ser valores válidos, em caso de testes utilize  um gerador de CPF OU CNPJ, o valor da requisição de exemplo é válido</u></h4>
+        /// <h4><u> - O endereço é validado na API dos correios por meio do cep informado, portanto os valores fornecidos devem coincidir exatamente com o retorno da api para um cep ( O endereço da requisição de exemplo é válido)</u></h4>
         /// <h4><b>Valores Validos para enums: </b></h4>
         /// 
         /// tipoCliente :["fisica", "juridica"]
@@ -86,8 +87,11 @@ namespace ClientsRegistration.Api.Controllers
         /// <remarks>
         /// <h3><u>Descrição: Rota para atualização de informações do cliente, atenção, todas as informações do objeto anterior serão substituídas pelas enviadas por essa rota</u></h3>
         /// <h4><b>Observações: </b> </h4> 
+        /// <h4>O Put atualiza todos os campos que podem ser atualizados, os campos que não serão alterados precisam ser preenchidos com o valor atual</h4> 
+        /// 
         ///<h4><u>Campos que podem ser atualizados: " : [email, telefones, endereco, classificacao]</u></h4>
-        /// <h4><u>Campos Obrigatórios" : []</u></h4>
+        /// <h4><u>Campos Obrigatórios" : [email, telefones, endereco, classificacao]</u></h4>
+        /// <h4><u> - O endereço é validado na API dos correios por meio do cep informado, portanto os valores fornecidos devem coincidir exatamente com o retorno da api para um cep ( O endereço da requisição de exemplo é válido)</u></h4>
         /// <h4><b>Valores Validos para enums: </b></h4>
         /// 
         /// classificacao :["Active", "Inactive", "Preferential"]
@@ -106,7 +110,7 @@ namespace ClientsRegistration.Api.Controllers
         ///Apaga do banco de dados um Cliente com o Id informado pela rota
         ///</summary>
         /// <response code="200">Cliente deletado com sucesso</response>
-        /// <response code="400">Problemas no corpo da requisição.</response>
+        /// <response code="404">Cliente não encontrado.</response>
         /// <response code="500"> Erro de Servidor.</response> 
 
         // DELETE api/<ClientsController>/5

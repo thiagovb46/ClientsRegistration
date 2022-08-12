@@ -41,7 +41,20 @@ namespace ClientsRegistration.Infra.Data.Repositories
                 throw new ClientNotFoundException();
             return client;
         }
+        public async Task<bool> ClientExists(Client client)
+        {
+            var cpfExists = client.Cpf != null
+                ? await _context.Clients.AnyAsync(c => c.Cpf == client.Cpf)
+                : false;
+            var cnpjExists = client.Cnpj != null
+                ? await _context.Clients.AnyAsync(c => c.Cnpj == client.Cnpj)
+                : false;
+            var emailExists = client.Email == null
+                ? await _context.Clients.AnyAsync(c => c.Cnpj == client.Cnpj)
+                : false;
 
+            return cpfExists || cnpjExists || emailExists;
+        }
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
