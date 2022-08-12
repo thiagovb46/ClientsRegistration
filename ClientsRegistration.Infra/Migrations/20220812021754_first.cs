@@ -14,11 +14,11 @@ namespace ClientsRegistration.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    EnterpriseName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    EnterpriseName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    Cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Classification = table.Column<int>(type: "int", nullable: false),
                     ClientType = table.Column<int>(type: "int", nullable: false)
                 },
@@ -34,13 +34,13 @@ namespace ClientsRegistration.Infra.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Neighborhood = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Neighborhood = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true),
                     Number = table.Column<int>(type: "int", nullable: false),
-                    Complement = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Complement = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,8 @@ namespace ClientsRegistration.Infra.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Ddd = table.Column<int>(type: "int", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,7 +77,29 @@ namespace ClientsRegistration.Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_ClientId",
                 table: "Addresses",
-                column: "ClientId");
+                column: "ClientId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_Cnpj",
+                table: "Clients",
+                column: "Cnpj",
+                unique: true,
+                filter: "[Cnpj] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_Cpf",
+                table: "Clients",
+                column: "Cpf",
+                unique: true,
+                filter: "[Cpf] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_Email",
+                table: "Clients",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PhoneNumbers_ClientId",

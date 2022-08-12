@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClientsRegistration.Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220811175210_fixRequiredFields")]
-    partial class fixRequiredFields
+    [Migration("20220812021754_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,18 @@ namespace ClientsRegistration.Infra.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Cnpj")
+                        .IsUnique()
+                        .HasFilter("[Cnpj] IS NOT NULL");
+
+                    b.HasIndex("Cpf")
+                        .IsUnique()
+                        .HasFilter("[Cpf] IS NOT NULL");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.ToTable("Clients");
                 });

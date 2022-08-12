@@ -103,6 +103,18 @@ namespace ClientsRegistration.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Cnpj")
+                        .IsUnique()
+                        .HasFilter("[Cnpj] IS NOT NULL");
+
+                    b.HasIndex("Cpf")
+                        .IsUnique()
+                        .HasFilter("[Cpf] IS NOT NULL");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.ToTable("Clients");
                 });
 

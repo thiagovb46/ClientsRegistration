@@ -13,7 +13,7 @@ namespace ClientsRegistration.Application.Validations
             ValuesToLookFor = new List<object>(values);
         }
 
-        public string GetErrorMessage(ValidationContext validationContext) => $"{validationContext.DisplayName} is required when {RelatedProperty} is one of the following value [{string.Join(", ", ValuesToLookFor.Select(x => $"'{x}'"))}]";
+        public string GetErrorMessage(ValidationContext validationContext) => $"{validationContext.DisplayName}  deve ser preenchido quando {RelatedProperty}  é do tipo [{string.Join(", ", ValuesToLookFor.Select(x => $"'{x}'"))}]";
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {

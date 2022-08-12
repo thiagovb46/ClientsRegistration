@@ -22,4 +22,8 @@
     <ProjectReference Include="..\ClientsRegistration.Model\ClientsRegistration.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

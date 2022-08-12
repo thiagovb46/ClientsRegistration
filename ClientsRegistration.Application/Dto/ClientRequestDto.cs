@@ -17,6 +17,7 @@ namespace ClientsRegistration.Application.Dto
         public string? Cnpj { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [ValidCPF]
+        [MinLength(11, ErrorMessage = "Campo {0} deve ter no máximo 11 digitos e sem caracteres especiais")]
         public string? CPF { get; set; }
         [ReqWhen(nameof(ClientType), ClientTypeEnum.fisica)]
         [JsonPropertyName("nome")]
