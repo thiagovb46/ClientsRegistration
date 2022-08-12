@@ -16,4 +16,4 @@ A arquitetura do projeto segue padrões, como:
 - O projeto foi desenvolvido utilizando o ORM Entity Framework Core com banco de dados  SQLServer localDb, para executá-lo, primeiro é necessário aplicar as migrações no banco de dados,  por meio do comando "update-database" no ConsoleManager do Visual Studio, lembre-se de selecionar o ClientsRegistration.Api como projeto default, logo em seguida inicie o projeto ClientsRegistration.Api.
 
 # Testes Unitários
-- Foram criados métodos unitários para verificar o correto funcionamento dos métodos responsáveis por cada caso de uso da api.
+- Foram criados testes unitários para verificar o correto funcionamento dos métodos responsáveis por cada caso de uso da api.
