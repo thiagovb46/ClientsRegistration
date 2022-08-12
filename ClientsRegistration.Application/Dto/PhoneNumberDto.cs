@@ -1,8 +1,12 @@
-﻿namespace ClientsRegistration.Application.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ClientsRegistration.Application.Dto
 {
     public class PhoneNumberDto
     {
+        [Range(10, 99, ErrorMessage = "Digite um dd válido")]
         public int Ddd { get; set; }
+        [MinLength(8, ErrorMessage = "Digite um telefone válido e com apenas numeros"), MaxLength(9, ErrorMessage = "Digite um telefone válido e com apenas numeros")]
         public string Number { get; set; }
 
         public List<PhoneNumberDto> GetExample()

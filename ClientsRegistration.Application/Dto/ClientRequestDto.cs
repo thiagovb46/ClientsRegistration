@@ -27,7 +27,7 @@ namespace ClientsRegistration.Application.Dto
         [Required]
         [EmailAddress]
         public string? Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Cadastro de telefone obrigatório")]
         [JsonPropertyName("telefones")]
         public List<PhoneNumberDto> Phones { get; set; }
         [MaxLength(100, ErrorMessage = "Campo {0} deve ter no máximo 100 caracteres")]
