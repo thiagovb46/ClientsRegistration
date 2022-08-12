@@ -1,6 +1,7 @@
 using ClientsRegistration.Application.Converters;
 using ClientsRegistration.Application.Dto;
 using ClientsRegistration.Application.ExternalServices.Interfaces;
+using ClientsRegistration.Application.UseCases.Implementations;
 using ClientsRegistration.Model.Enum;
 using ClientsRegistration.Model.IRepositories;
 using ClientsRegistration.Model.Model;
@@ -24,17 +25,33 @@ namespace ClientsRegistration.Test
             cepServiceMock.Setup(cep => cep
             .VerifyAddress(It.IsAny<AddressDto>()))
                 .Returns((AddressDto c) => c);
-
-            converterMock.Setup(con => con.Convert(It.IsAny<ClientRequestDto>()))
-                .Returns((Client c) => c);
         }
         [Theory]
         [MemberData(nameof(ClientDtoTestDataGenerator))]
-        public void CreateTest(ClientRequestDto clientDto)
+        public async void CreateTest(ClientRequestDto clientDto)
         {
             //Arrange
+            converterMock.Setup(con => con.Convert(It.IsAny<ClientRequestDto>()))
+            .Returns((new Client()
+            {
+                Cpf = clientDto.CPF,
+                Cnpj = clientDto.Cnpj,
+                Email = clientDto.Email,
+                Name = clientDto.Name,
+                Address = new()
+                {
+                    PostalCode = clientDto.Address.PostalCode,
+                }
+            }));
+            CreateClientUseCase useCase = new(repositoryMock.Object, converterMock.Object, cepServiceMock.Object);
             //Act
+            var actual = await useCase.Create(clientDto);
             //Assert
+            Assert.Equal(clientDto.CPF, actual.CPF);
+            Assert.Equal(clientDto.Cnpj, actual.Cnpj);
+            Assert.Equal(clientDto.Email, actual.Email);
+            Assert.Equal(clientDto.Name, actual.Name);
+            Assert.Equal(clientDto.Address.PostalCode, actual.Address.PostalCode);
 
         }
         public static IEnumerable<object[]> ClientDtoTestDataGenerator()
